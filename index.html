@@ -50,14 +50,32 @@
     </div>
     <script>
       document.querySelector("button").addEventListener("click", () => {
-        let years =
-          new Date().getFullYear() -
-          document.querySelector("#date").value.split("-")[0];
-        if (years < 0)
+        now = new Date();
+        date_diff =
+          now.getDate() - document.querySelector("input").value.split("-")[2];
+        month_diff =
+          now.getMonth() -
+          document.querySelector("input").value.split("-")[1] +
+          1;
+        year_diff =
+          now.getFullYear() -
+          document.querySelector("input").value.split("-")[0];
+        if (year_diff < 0) {
+          alert("Please enter valid Date of Birth");
+          return;
+        } else if (month_diff > 0) {
+          console.log(year_diff);
+        } else if (month_diff === 0 && date_diff >= 0) {
+          console.log(year_diff);
+        } else {
+          year_diff = year_diff - 1;
+        }
+
+        if (year_diff < 0)
           document.querySelector(".show").innerHTML = "Invalid Age";
         else
-          document.querySelector(".show").innerHTML = `your are  ${years} ${
-            years == 1 ? "year" : "years"
+          document.querySelector(".show").innerHTML = `your are  ${year_diff} ${
+            year_diff == 1 ? "year" : "years"
           } old.`;
       });
     </script>
